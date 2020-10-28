@@ -18,23 +18,48 @@ public class Main {
 
         Object[] participants = new Object[]{createRobot(), createHuman(), createCat(), createCat(), createHuman(), createRobot()};
         Object[] barriers = new Object[]{createTreadmill(), createWall(), createTreadmill(), createWall()};
+        boolean[] isWinner=new boolean[participants.length];
+        for (int i=0; i<isWinner.length; i++){
+            isWinner[i]=true;
+        }
 
-        for (Object participant : participants) {
-            if (participant instanceof Jumper) {
+        for (int i=0; i< participants.length;i++) {
+            if (participants[i] instanceof Jumper) {
                 for (int j = 0; j < barriers.length; j++) {
                     if (barriers[j] instanceof Wall) {
-                        ((Jumper) participant).jump((Wall) barriers[j]);
+                        if (((Jumper) participants[i]).isAbleToJump(((Wall) barriers[j])))
+                            continue;
+                        else {
+                            System.out.println("Участник выбыл из соревнований.");
+                            isWinner[i]=false;
+                            break;
+                        }
                     }
                 }
             }
-            if (participant instanceof Runner) {
+            System.out.println();
+            if (participants[i] instanceof Runner&&isWinner[i]) {
                 for (int j = 0; j < barriers.length; j++) {
                     if (barriers[j] instanceof Treadmill) {
-                        ((Runner) participant).run((Treadmill) barriers[j]);
+                        if (((Runner) participants[i]).isAbleToRun((Treadmill) barriers[j]))
+                            continue;
+                        else {
+                            System.out.println("Участник выбыл из соревнований.");
+                            System.out.println();
+                            isWinner[i]=false;
+                            break;
+                        }
                     }
                 }
             }
+
+            if
+                (isWinner[i]) {
+                System.out.println("Участник преодолел все препятствия!");
+                System.out.println();}
+
         }
+
     }
 
 
@@ -51,7 +76,7 @@ public class Main {
         String[] names = {"Bob", "John", "Silver", "PP9", "K4", "LL9", "LJK", "EE49", "PP87"};
         int techNumber = random.nextInt(70) + 10;
         String name = names[random.nextInt(9)];
-        return new Robot(name, techNumber, createLimit(150, 100), createLimit(10000, 5000));
+        return new Robot(name, techNumber, createLimit(200, 150), createLimit(10000, 5000));
     }
 
     public static Cat createCat() {
@@ -73,7 +98,7 @@ public class Main {
     }
 
     public static Treadmill createTreadmill() {
-        return new Treadmill(createLimit(10000, 400));
+        return new Treadmill(createLimit(8000, 400));
     }
 
 }

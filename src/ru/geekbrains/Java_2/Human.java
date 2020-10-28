@@ -1,10 +1,10 @@
 package ru.geekbrains.Java_2;
 
 public class Human implements Runner, Jumper {
-    private String name;
+    public String name;
     private int age;
-    private int maxRunDistance;
-    private int maxJumpHeight;
+    public int maxRunDistance;
+    public int maxJumpHeight;
 
     Human(int age, String name) {
         this.age = age;
@@ -18,18 +18,25 @@ public class Human implements Runner, Jumper {
     }
 
     @Override
-    public void jump(Wall wall) {
-        if (wall.getHeight() <= this.maxJumpHeight) {
-            System.out.println("Человек " + this.name + " перепрыгнул через стену высотой " + wall.getHeight()+ " см.");
-        } else
-            System.out.println("Человек " + this.name + " не смог перепрыгнуть через стену высотой " + wall.getHeight()+ " см.");
+    public boolean isAbleToRun(Treadmill treadmill) {
+        if (treadmill.getDistance() <= this.maxRunDistance) {
+            System.out.println("Человек " + this.name + " смог пробежать дистанцию " + treadmill.getDistance() + " м.");
+            return true;
+        } else {
+            System.out.println("Человек " + this.name + " не смог пробежать дистанцию " + treadmill.getDistance() + " м.");
+            return false;
+        }
+
     }
 
-
     @Override
-    public void run(Treadmill treadmill) {
-        if (treadmill.getDistance() <= this.maxRunDistance) {
-            System.out.println("Человек " + this.name + " смог пробежать дистанцию " + treadmill.getDistance()+ " м.");
-        } else System.out.println("Человек " + this.name + " не смог пробежать дистанцию " + treadmill.getDistance()+ " м.");
+    public boolean isAbleToJump(Wall wall) {
+        if (wall.getHeight() <= this.maxJumpHeight) {
+            System.out.println("Человек " + this.name + " перепрыгнул через стену высотой " + wall.getHeight() + " см.");
+            return true;
+        } else {
+            System.out.println("Человек " + this.name + " не смог перепрыгнуть через стену высотой " + wall.getHeight() + " см.");
+            return false;
+        }
     }
 }

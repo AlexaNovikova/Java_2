@@ -1,10 +1,10 @@
 package ru.geekbrains.Java_2;
 
 public class Cat implements Runner, Jumper {
-    private String name;
+    public String name;
     private int age;
-    private int maxRunDistance;
-    private int maxJumpHeight;
+    public int maxRunDistance;
+    public int maxJumpHeight;
 
     Cat(int age, String name, int maxJumpHeight, int maxRunDistance) {
         this.age = age;
@@ -14,17 +14,25 @@ public class Cat implements Runner, Jumper {
     }
 
     @Override
-    public void jump(Wall wall) {
-        if (wall.getHeight() <= this.maxJumpHeight) {
-            System.out.println("Кот " + name + " перепрыгнул через стену высотой " + wall.getHeight() + " см");
-        } else System.out.println("Кот " + name + " не смог перепрыгнуть через стену высотой " + wall.getHeight()+ " см.");
+    public boolean isAbleToRun(Treadmill treadmill) {
+        if (treadmill.getDistance() <= this.maxRunDistance) {
+            System.out.println("Кот/кошка " + this.name + " смог/ла пробежать дистанцию " + treadmill.getDistance() + " м.");
+            return true;
+        } else {
+            System.out.println("Кот/кошка " + this.name + " не смог/ла пробежать дистанцию " + treadmill.getDistance() + " м.");
+            return false;
+        }
+
     }
 
-
     @Override
-    public void run(Treadmill treadmill) {
-        if (treadmill.getDistance() <= this.maxRunDistance) {
-            System.out.println("Кот/кошка " + name + " смог/смогла пробежать дистанцию " + treadmill.getDistance()+ " м.");
-        } else System.out.println("Кот " + name + " не смог/смогла пробежать дистанцию " + treadmill.getDistance()+ " м.");
+    public boolean isAbleToJump(Wall wall) {
+        if (wall.getHeight() <= this.maxJumpHeight) {
+            System.out.println("Кот/кошка " + this.name + " перепрыгнул/а через стену высотой " + wall.getHeight() + " см.");
+            return true;
+        } else {
+            System.out.println("Кот/кошка " + this.name + " не смог/ла перепрыгнуть через стену высотой " + wall.getHeight() + " см.");
+            return false;
+        }
     }
 }

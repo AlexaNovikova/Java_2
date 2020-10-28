@@ -1,7 +1,7 @@
 package ru.geekbrains.Java_2;
 
 public class Robot implements Jumper, Runner {
-    private String name;
+    public String name;
     private int techNumber;
     int maxJumpHeight;
     int maxRunDistance;
@@ -17,18 +17,29 @@ public class Robot implements Jumper, Runner {
         this.maxRunDistance = maxRunDistance;
     }
 
+
     @Override
-    public void jump(Wall wall) {
-        if (wall.getHeight() <= this.maxJumpHeight) {
-            System.out.println("Робот " + name + " перепрыгнул через стену высотой " + wall.getHeight()+ " см.");
-        } else System.out.println("Робот " + name + " не смог перепрыгнуть через стену высотой " + wall.getHeight()+ " см.");
+    public boolean isAbleToRun(Treadmill treadmill) {
+        if (treadmill.getDistance() <= this.maxRunDistance) {
+            System.out.println("Робот " + this.name + " смог пробежать дистанцию " + treadmill.getDistance() + " м.");
+            return true;
+        } else {
+            System.out.println("Робот " + this.name + " не смог пробежать дистанцию " + treadmill.getDistance() + " м.");
+            return false;
+        }
+
     }
 
-
     @Override
-    public void run(Treadmill treadmill) {
-        if (treadmill.getDistance() <= this.maxRunDistance) {
-            System.out.println("Робот " + name + " смог пробежать дистанцию " + treadmill.getDistance()+ " м.");
-        } else System.out.println("Робот " + name + " не смог пробежать дистанцию " + treadmill.getDistance()+ " м.");
+    public boolean isAbleToJump(Wall wall) {
+        if (wall.getHeight() <= this.maxJumpHeight) {
+            System.out.println("Робот " + this.name + " перепрыгнул через стену высотой " + wall.getHeight() + " см.");
+            return true;
+        } else {
+            System.out.println("Робот " + this.name + " не смог перепрыгнуть через стену высотой " + wall.getHeight() + " см.");
+            return false;
+        }
     }
 }
+
+
