@@ -5,7 +5,8 @@ public class MyArrayDataException extends RuntimeException {
     int i;
     int j;
 
-    public void printErrorPosition() {
+    @Override
+    public void printStackTrace() {
         System.out.println("Введен символ вместо числа в ячейке: " + i + " " + j);
     }
 

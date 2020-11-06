@@ -16,14 +16,11 @@ public class Main {
         try {
             int sum = MassSum(massString);
             System.out.println("Сумма эементов массива равна " + sum);
-        } catch (MyArraySizeException e) {
-            e.printStackTrace();
-        } catch (MyArrayDataException e) {
-            e.printErrorPosition();
-        }
+        } catch (MyArraySizeException | MyArrayDataException e) {
+            e.printStackTrace();}
     }
 
-    public static int MassSum(String[][] mass) {
+    public static int MassSum(String[][] mass) throws MyArrayDataException, MyArraySizeException{
         int sum = 0;
         if (mass.length != 4) throw new MyArraySizeException();
         for (int i = 0; i < 4; i++) {
