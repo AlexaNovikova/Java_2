@@ -62,6 +62,7 @@ public class Main {
         telephoneGuide.addInfo("Волков", "8-999-987-33-22");
         telephoneGuide.addInfo("Петров", "8-499-987-92-11");
         telephoneGuide.addInfo("Петров", "8-199-987-92-11");
+
         telephoneGuide.getInfo("Петров");
         telephoneGuide.getInfo("Сидоров");
     }
